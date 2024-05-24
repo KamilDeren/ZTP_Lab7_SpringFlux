@@ -1,15 +1,28 @@
 package pl.kamilderen.ztplab7.model;
 
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.Getter;
 import java.util.List;
 
-@Data
-@Table("orders")
+@Getter
 public class Order {
-    @Id
-    private Long id;
-    private List<Long> bookIds;
-    private String userId;
+    private static int counter = 0;
+    private int id;
+    private List<Book> books;
+
+    public Order() {
+        this.id = ++counter;
+    }
+
+    public Order(List<Book> books) {
+        this();
+        this.books = books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public static void setCounter(int counter) {
+        Order.counter = counter;
+    }
 }

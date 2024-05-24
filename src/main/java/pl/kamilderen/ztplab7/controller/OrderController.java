@@ -1,35 +1,25 @@
 package pl.kamilderen.ztplab7.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.kamilderen.ztplab7.model.Order;
-import pl.kamilderen.ztplab7.service.OrderService;
+import pl.kamilderen.ztplab7.service.CartService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-    private final OrderService orderService;
+    @Autowired
+    private CartService cartService;
 
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
-
-    @PreAuthorize("isAuthenticated()")
     @GetMapping
     public Flux<Order> getAllOrders() {
-        return orderService.getAllOrders();
+        return cartService.getAllOrders();
     }
 
-    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}")
-    public Mono<Order> getOrderById(@PathVariable Long id) {
-        return orderService.getOrderById(id);
-    }
-
-    @PostMapping
-    public Mono<Order> placeOrder(@RequestBody Order order) {
-        return orderService.placeOrder(order);
+    public Mono<Order> getOrderById(@PathVariable int id) {
+        return cartService.getOrderById(id);
     }
 }

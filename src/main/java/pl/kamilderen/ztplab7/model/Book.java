@@ -1,16 +1,17 @@
 package pl.kamilderen.ztplab7.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Data
-@Table("books")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
-    @Id
-    private Long id;
     private String title;
     private String author;
-    private String releaseDate;
+    private LocalDate publicationDate;
     private String isbn;
 }
