@@ -6,7 +6,7 @@ import java.util.List;
 @Getter
 public class Order {
     private static int counter = 0;
-    private int id;
+    private final int id;
     private List<Book> books;
 
     public Order() {
